@@ -10,7 +10,7 @@
 	</parent>
 	
 	<groupId>br.com.bbnsdevelop</groupId>
-	<artifactId>jdbc</artifactId>
+	<artifactId>database-jpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jdbc</name>
 	<description>Demo project for Spring Boot</description>
