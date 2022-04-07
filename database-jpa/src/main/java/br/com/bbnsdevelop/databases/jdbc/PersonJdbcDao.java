@@ -8,7 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.bbnsdevelop.databases.jdbc.dto.Person;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Repository
 public class PersonJdbcDao {
 	
@@ -16,7 +18,9 @@ public class PersonJdbcDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<Person> findAll(){
-		return jdbcTemplate.query(querySelectAllPerson(), new BeanPropertyRowMapper<Person>(Person.class));		
+		String selectAllPerson = querySelectAllPerson();
+		log.info("buscando todos as pessoas: {} ", selectAllPerson);
+		return jdbcTemplate.query(selectAllPerson, new BeanPropertyRowMapper<Person>(Person.class));		
 	}
 
 	private String querySelectAllPerson() {
