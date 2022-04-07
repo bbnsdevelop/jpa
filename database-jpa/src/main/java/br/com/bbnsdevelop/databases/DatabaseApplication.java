@@ -1,13 +1,15 @@
-package br.com.bbnsdevelop.jdbc;
+package br.com.bbnsdevelop.databases;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class DatabaseApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DatabaseApplication.class, args);
+		
 	}
+
 
 }

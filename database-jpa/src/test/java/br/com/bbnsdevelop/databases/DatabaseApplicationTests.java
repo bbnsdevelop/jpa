@@ -1,4 +1,4 @@
-package br.com.bbnsdevelop.jdbc;
+package br.com.bbnsdevelop.databases;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
