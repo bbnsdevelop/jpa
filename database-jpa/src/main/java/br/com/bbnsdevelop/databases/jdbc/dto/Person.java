@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Person {
 	
+	private Long id;
 	private String name; 
 	private String location; 
 	private Date birthDate;
