@@ -1,4 +1,4 @@
-package br.com.bbnsdevelop.databases.jdbc.controllers;
+package br.com.bbnsdevelop.databases.controllers;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bbnsdevelop.databases.jdbc.PersonJdbcDao;
 import br.com.bbnsdevelop.databases.jdbc.dto.Person;
+import br.com.bbnsdevelop.databases.jpa.services.PersonService;
 
 @RestController
 @RequestMapping("/persons")
@@ -25,9 +26,12 @@ public class PersonController {
 	@Autowired
 	private PersonJdbcDao personJdbcDao;
 	
+	@Autowired
+	private PersonService service;
+	
 	@GetMapping
-	public ResponseEntity<List<Person>> getPersons(){
-		return ResponseEntity.status(HttpStatus.OK).body(personJdbcDao.findAll());
+	public ResponseEntity<List<br.com.bbnsdevelop.databases.jpa.Person>> getPersons(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 	
 	@GetMapping("/{id}")
