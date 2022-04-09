@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.bbnsdevelop.databases.jdbc.dto.Person;
+import br.com.bbnsdevelop.databases.jdbc.rowMapper.PersonRowMapper;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -37,7 +38,7 @@ public class PersonJdbcDao{
 		MapSqlParameterSource param = new MapSqlParameterSource();
 		param.addValue("id", id);
 		
-		return namedParameterJdbcTemplate.queryForObject(selectPersonById, param, new BeanPropertyRowMapper<Person>(Person.class));
+		return namedParameterJdbcTemplate.queryForObject(selectPersonById, param, new PersonRowMapper());
 	}
 	
 	public Person save(Person person) {
