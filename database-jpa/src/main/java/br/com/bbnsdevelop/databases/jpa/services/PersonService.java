@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.bbnsdevelop.databases.jpa.Person;
+import br.com.bbnsdevelop.databases.jpa.repositories.PersonEntityManager;
 import br.com.bbnsdevelop.databases.jpa.repositories.PersonRepository;
 import lombok.extern.log4j.Log4j2;
 
@@ -17,6 +18,19 @@ public class PersonService {
 	private PersonRepository personRepository;
 	
 	
+	@Autowired
+	private PersonEntityManager personEntityManager;
+	
+	
+	public List<Person> findAllByEntityManager(){
+		log.info("buscando todos as pessoas com EntityManager");
+		return personEntityManager.findAll();		
+	}
+	
+	public Person findByIdEntityManager(Long id) {
+		log.info("buscando pessoa EntityManager : pelo id {} ", id);		
+		return personEntityManager.findById(id);
+	}
 	
 	public List<Person> findAll(){
 		log.info("buscando todos as pessoas");

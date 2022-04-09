@@ -31,12 +31,12 @@ public class PersonController {
 	
 	@GetMapping
 	public ResponseEntity<List<br.com.bbnsdevelop.databases.jpa.Person>> getPersons(){
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAllByEntityManager());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Person> getPersonById(@PathVariable("id") Long id){
-		return ResponseEntity.status(HttpStatus.OK).body(personJdbcDao.findById(id));
+	public ResponseEntity<br.com.bbnsdevelop.databases.jpa.Person> getPersonById(@PathVariable("id") Long id){
+		return ResponseEntity.status(HttpStatus.OK).body(service.findByIdEntityManager(id));
 	}
 	
 	@PostMapping
