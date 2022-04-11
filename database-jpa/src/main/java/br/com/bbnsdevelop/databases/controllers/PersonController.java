@@ -40,8 +40,8 @@ public class PersonController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Person> savePerson(@RequestBody Person person){
-		return ResponseEntity.status(HttpStatus.OK).body(personJdbcDao.save(person));
+	public ResponseEntity<br.com.bbnsdevelop.databases.jpa.Person> savePerson(@RequestBody br.com.bbnsdevelop.databases.jpa.Person person){
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(person));
 	}
 	@PutMapping("/{id}")
 	public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable("id") Long id){
