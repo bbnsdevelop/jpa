@@ -8,7 +8,7 @@ spring:
     console.enabled: true
     console:
       path: /h2
-            
+  
   datasource:
     url: jdbc:h2:mem:testdb
     
@@ -16,3 +16,9 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
+  
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:  
+        format_sql: false
