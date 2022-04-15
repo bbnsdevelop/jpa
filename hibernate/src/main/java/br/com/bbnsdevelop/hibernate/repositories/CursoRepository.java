@@ -34,7 +34,12 @@ public class CursoRepository {
 	}
 	
 	public void deleteById(Long id) {
-		//entityManager.remove(Curso.class, id);
+		Curso curso = this.findById(id);
+		if(curso != null){
+			entityManager.remove(curso);			
+		}else {
+			throw new IllegalArgumentException("Curso não encontrado");
+		}
 	}
 
 }
