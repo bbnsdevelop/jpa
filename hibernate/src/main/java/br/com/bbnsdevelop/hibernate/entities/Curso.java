@@ -1,11 +1,16 @@
 package br.com.bbnsdevelop.hibernate.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +29,14 @@ public class Curso {
 	
 	@Column(name ="nome", nullable = false, length = 50)
 	private String nome;
+	
+	@CreationTimestamp
+	@Column(name = "dh_criacao", nullable = false)
+	private LocalDateTime dataCriacao;
+	
+	@UpdateTimestamp
+	@Column(name = "dh_atualizacao", nullable = true)
+	private LocalDateTime ultimaAtualizacao;
+	
 
 }

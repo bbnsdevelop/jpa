@@ -4,6 +4,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.Test;
@@ -36,7 +38,7 @@ public class CursoControllerTest {
 	@Test
 	void criarCursoTest() throws Exception {
 
-		Curso curso = new Curso(null, "JavaScript");
+		Curso curso = new Curso(null, "JavaScript", LocalDateTime.now(), null);
 		mockMvc.perform(
 				post("/api/cursos").contentType("application/json").content(objectMapper.writeValueAsString(curso)))
 				.andExpect(status().isCreated());

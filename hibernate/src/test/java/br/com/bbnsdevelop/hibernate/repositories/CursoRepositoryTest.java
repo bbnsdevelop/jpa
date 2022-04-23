@@ -6,6 +6,8 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -49,7 +51,7 @@ public class CursoRepositoryTest {
 	@Order(1)
 	@DirtiesContext
 	public void save() {
-		Curso curso = new Curso(null, "Java");		
+		Curso curso = new Curso(null, "Java", LocalDateTime.now(), null);		
 		repository.save(curso);
 		assertEquals("Java", curso.getNome());
 	}
@@ -83,7 +85,7 @@ public class CursoRepositoryTest {
 	}
 
 	private Curso mockCurso() {
-		Curso curso = new Curso(1L, "JPA");
+		Curso curso = new Curso(1L, "JPA", LocalDateTime.now(), LocalDateTime.now());
 		return curso;
 	}
 }
