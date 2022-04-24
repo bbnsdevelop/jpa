@@ -1,6 +1,9 @@
 package br.com.bbnsdevelop.hibernate.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,17 @@ public class CursoRepository {
 	private EntityManager entityManager;
 	
 	
-	
 	public Curso findById(Long id) {
-		return entityManager.find(Curso.class, id);
+		//return entityManager.find(Curso.class, id);
+
+		TypedQuery<Curso> namedQuery = entityManager.createNamedQuery("query_get_curso_by_id", Curso.class);
+		namedQuery.setParameter("id", id);
+		return namedQuery.getSingleResult();
+	}
+	
+	public List<Curso> findAll() {
+		TypedQuery<Curso> query = entityManager.createNamedQuery("query_get_all_cursos", Curso.class);
+		return query.getResultList();
 	}
 	
 	

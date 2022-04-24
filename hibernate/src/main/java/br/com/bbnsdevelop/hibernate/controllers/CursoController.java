@@ -1,5 +1,7 @@
 package br.com.bbnsdevelop.hibernate.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,12 @@ public class CursoController {
 	
 	@Autowired
 	private CursoRepository repository;
+	
+	
+	@GetMapping
+	public List<Curso> getAll() {
+		return repository.findAll();
+	}
 	
 	@GetMapping("/{id}")
 	public Curso getById(@PathVariable("id") Long id) {
