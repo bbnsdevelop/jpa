@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,5 +26,8 @@ public class Passaporte {
 	
 	@Column(name ="numero", nullable = false, length = 15)
 	private String numero;
+	
+	@OneToOne
+	private Estudante estudante;
 
 }
