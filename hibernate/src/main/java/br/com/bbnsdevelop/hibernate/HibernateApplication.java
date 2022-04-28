@@ -9,13 +9,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.bbnsdevelop.hibernate.entities.Curso;
+import br.com.bbnsdevelop.hibernate.entities.Estudante;
+import br.com.bbnsdevelop.hibernate.entities.Passaporte;
 import br.com.bbnsdevelop.hibernate.repositories.CursoRepository;
+import br.com.bbnsdevelop.hibernate.repositories.EstudanteRepository;
+import br.com.bbnsdevelop.hibernate.repositories.PassaporteRepository;
 
 @SpringBootApplication
 public class HibernateApplication implements CommandLineRunner {
 
 	@Autowired
 	private CursoRepository repository;
+	
+	@Autowired
+	private EstudanteRepository estudanteRepository;
+	
+	@Autowired
+	private PassaporteRepository passaporteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateApplication.class, args);
@@ -30,7 +40,13 @@ public class HibernateApplication implements CommandLineRunner {
 		repository.save(cursos.get(0));
 		repository.save(cursos.get(1));
 		repository.save(cursos.get(2));
+		
+		
+		Estudante s = new Estudante(null, "Willian", null);
+		Passaporte p = new Passaporte(null, "ZR154877", s);
 
+		estudanteRepository.save(s);
+		passaporteRepository.save(p);
 	}
 
 }
