@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -28,5 +29,8 @@ public class Review {
 	
 	@Column(name ="avaliacao", nullable = false)
 	private Integer avaliacao;
+	
+	@ManyToOne
+	private Curso curso;
 
 }

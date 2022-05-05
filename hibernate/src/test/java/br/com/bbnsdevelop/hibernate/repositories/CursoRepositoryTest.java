@@ -51,7 +51,7 @@ public class CursoRepositoryTest {
 	@Order(1)
 	@DirtiesContext
 	public void save() {
-		Curso curso = new Curso(null, "Java", LocalDateTime.now(), null);		
+		Curso curso = new Curso(null, "Java", LocalDateTime.now(), null, null);		
 		repository.save(curso);
 		assertEquals("Java", curso.getNome());
 	}
@@ -85,7 +85,7 @@ public class CursoRepositoryTest {
 	}
 
 	private Curso mockCurso() {
-		Curso curso = new Curso(1L, "JPA", LocalDateTime.now(), LocalDateTime.now());
+		Curso curso = new Curso(1L, "JPA", LocalDateTime.now(), LocalDateTime.now(), null);
 		return curso;
 	}
 }

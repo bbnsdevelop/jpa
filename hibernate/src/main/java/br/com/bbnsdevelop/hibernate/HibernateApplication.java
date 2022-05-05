@@ -11,9 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.bbnsdevelop.hibernate.entities.Curso;
 import br.com.bbnsdevelop.hibernate.entities.Estudante;
 import br.com.bbnsdevelop.hibernate.entities.Passaporte;
+import br.com.bbnsdevelop.hibernate.entities.Review;
 import br.com.bbnsdevelop.hibernate.repositories.CursoRepository;
 import br.com.bbnsdevelop.hibernate.repositories.EstudanteRepository;
 import br.com.bbnsdevelop.hibernate.repositories.PassaporteRepository;
+import br.com.bbnsdevelop.hibernate.repositories.ReviewRepository;
 
 @SpringBootApplication
 public class HibernateApplication implements CommandLineRunner {
@@ -26,6 +28,9 @@ public class HibernateApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PassaporteRepository passaporteRepository;
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateApplication.class, args);
@@ -33,9 +38,9 @@ public class HibernateApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Curso> cursos = List.of(new Curso(null, "Java", LocalDateTime.now(), null),
-				new Curso(null, "Spring boot", LocalDateTime.now(), null),
-				new Curso(null, "Python", LocalDateTime.now(), null));
+		List<Curso> cursos = List.of(new Curso(null, "Java", LocalDateTime.now(), null, null),
+				new Curso(null, "Spring boot", LocalDateTime.now(), null, null),
+				new Curso(null, "Python", LocalDateTime.now(), null, null));
 
 		repository.save(cursos.get(0));
 		repository.save(cursos.get(1));
@@ -47,6 +52,18 @@ public class HibernateApplication implements CommandLineRunner {
 
 		estudanteRepository.save(s);
 		passaporteRepository.save(p);
+		Review r = new Review();
+		r.setAvaliacao(5);
+		r.setDescricao("Curso muito bom");
+		r.setCurso(cursos.get(0));
+		reviewRepository.save(r);
+		
+		
+		Review r1 = new Review();
+		r1.setAvaliacao(4);
+		r1.setDescricao("Excelente curso");
+		r1.setCurso(cursos.get(0));
+		reviewRepository.save(r1);
 	}
 
 }

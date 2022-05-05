@@ -1,6 +1,7 @@
 package br.com.bbnsdevelop.hibernate.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -43,5 +45,8 @@ public class Curso {
 	@UpdateTimestamp
 	@Column(name = "dh_atualizacao", nullable = true)
 	private LocalDateTime ultimaAtualizacao;
+	
+	@OneToMany(mappedBy = "curso")
+	private List<Review> reviews;
 
 }

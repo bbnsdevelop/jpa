@@ -26,7 +26,7 @@ public class Passaporte {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name ="numero", nullable = false, length = 15)
+	@Column(name ="numero", nullable = false, length = 15, unique = true)
 	private String numero;
 	
 	@JsonIgnore
