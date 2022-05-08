@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -51,6 +53,10 @@ public class Curso {
 	private List<Review> reviews;
 	
 	@ManyToMany
+	@JoinTable(name = "TB_CURSO_ESTUDANTE",
+				joinColumns = @JoinColumn(name="CURSO_ID"),
+				inverseJoinColumns = @JoinColumn(name="ESTUDANTE_ID")
+			)
 	private List<Estudante> estudantes;
 
 }
