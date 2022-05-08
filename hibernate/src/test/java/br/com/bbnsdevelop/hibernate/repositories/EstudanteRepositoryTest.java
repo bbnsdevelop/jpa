@@ -49,7 +49,7 @@ public class EstudanteRepositoryTest {
 	@Order(1)
 	@DirtiesContext
 	public void save() {
-		Estudante estudante = new Estudante(1L, "Willian", null);	
+		Estudante estudante = new Estudante(1L, "Willian", null, null);	
 		repository.save(estudante);
 		assertEquals("Willian", estudante.getNome());
 	}
@@ -83,7 +83,7 @@ public class EstudanteRepositoryTest {
 	}
 
 	private Estudante mockC() {
-		Estudante estudante = new Estudante(1L, "Willian", null);
+		Estudante estudante = new Estudante(1L, "Willian", null, null);
 		return estudante;
 	}
 }

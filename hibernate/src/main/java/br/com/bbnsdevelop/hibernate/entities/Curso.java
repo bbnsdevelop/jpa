@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -48,5 +49,8 @@ public class Curso {
 	
 	@OneToMany(mappedBy = "curso")
 	private List<Review> reviews;
+	
+	@ManyToMany
+	private List<Estudante> estudantes;
 
 }

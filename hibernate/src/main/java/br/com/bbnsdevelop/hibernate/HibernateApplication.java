@@ -38,16 +38,16 @@ public class HibernateApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Curso> cursos = List.of(new Curso(null, "Java", LocalDateTime.now(), null, null),
-				new Curso(null, "Spring boot", LocalDateTime.now(), null, null),
-				new Curso(null, "Python", LocalDateTime.now(), null, null));
+		List<Curso> cursos = List.of(new Curso(null, "Java", LocalDateTime.now(), null, null, null),
+				new Curso(null, "Spring boot", LocalDateTime.now(), null, null, null),
+				new Curso(null, "Python", LocalDateTime.now(), null, null, null));
 
 		repository.save(cursos.get(0));
 		repository.save(cursos.get(1));
 		repository.save(cursos.get(2));
 		
 		
-		Estudante s = new Estudante(null, "Willian", null);
+		Estudante s = new Estudante(null, "Willian", null, null);
 		Passaporte p = new Passaporte(null, "ZR154877", s);
 
 		estudanteRepository.save(s);
