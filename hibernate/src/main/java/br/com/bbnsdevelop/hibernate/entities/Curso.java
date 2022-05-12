@@ -1,6 +1,7 @@
 package br.com.bbnsdevelop.hibernate.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -57,6 +58,13 @@ public class Curso {
 				joinColumns = @JoinColumn(name="CURSO_ID"),
 				inverseJoinColumns = @JoinColumn(name="ESTUDANTE_ID")
 			)
-	private List<Estudante> estudantes;
+	private List<Estudante> estudantes  = new ArrayList<>();
+	
+	public void addEstudante(Estudante estudante) {
+		if(estudantes == null) {
+			estudantes = new ArrayList<>();
+		}
+		estudantes.add(estudante);
+	}
 
 }

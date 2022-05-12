@@ -64,6 +64,9 @@ public class HibernateApplication implements CommandLineRunner {
 		r1.setDescricao("Excelente curso");
 		r1.setCurso(cursos.get(0));
 		reviewRepository.save(r1);
+		
+		estudanteRepository.inserirEstudanteAoCurso(s.getId(), cursos.get(0).getId());
+		estudanteRepository.inserirEstudanteAoCurso(s.getId(), cursos.get(1).getId());
 	}
 
 }

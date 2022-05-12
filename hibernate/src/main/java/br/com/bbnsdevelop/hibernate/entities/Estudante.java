@@ -1,5 +1,6 @@
 package br.com.bbnsdevelop.hibernate.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,4 +37,10 @@ public class Estudante {
 	@ManyToMany(mappedBy = "estudantes")
 	private List<Curso> cursos;
 
+	public void addCurso(Curso curso) {
+		if(cursos == null) {
+			cursos = new ArrayList<>();
+		}
+		cursos.add(curso);
+	}
 }
