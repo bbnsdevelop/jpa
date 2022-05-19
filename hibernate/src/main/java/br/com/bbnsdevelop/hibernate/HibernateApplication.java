@@ -1,5 +1,6 @@
 package br.com.bbnsdevelop.hibernate;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import br.com.bbnsdevelop.hibernate.entities.Curso;
 import br.com.bbnsdevelop.hibernate.entities.Estudante;
 import br.com.bbnsdevelop.hibernate.entities.Passaporte;
 import br.com.bbnsdevelop.hibernate.entities.Review;
+import br.com.bbnsdevelop.hibernate.entities.heranca.FuncionarioMeioPeriodo;
+import br.com.bbnsdevelop.hibernate.entities.heranca.FuncionarioPeriodoIntegral;
 import br.com.bbnsdevelop.hibernate.repositories.CursoRepository;
 import br.com.bbnsdevelop.hibernate.repositories.EstudanteRepository;
+import br.com.bbnsdevelop.hibernate.repositories.FuncionarioRepository;
 import br.com.bbnsdevelop.hibernate.repositories.PassaporteRepository;
 import br.com.bbnsdevelop.hibernate.repositories.ReviewRepository;
 
@@ -31,6 +35,9 @@ public class HibernateApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ReviewRepository reviewRepository;
+	
+	@Autowired
+	private FuncionarioRepository funcionarioRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateApplication.class, args);
@@ -67,6 +74,10 @@ public class HibernateApplication implements CommandLineRunner {
 		
 		estudanteRepository.inserirEstudanteAoCurso(s.getId(), cursos.get(0).getId());
 		estudanteRepository.inserirEstudanteAoCurso(s.getId(), cursos.get(1).getId());
+		
+		funcionarioRepository.inserir(new FuncionarioPeriodoIntegral("Snow", new BigDecimal("4000")));
+		
+		funcionarioRepository.inserir(new FuncionarioMeioPeriodo("Jhon", new BigDecimal("40")));
 	}
 
 }

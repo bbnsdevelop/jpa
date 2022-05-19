@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +36,7 @@ public class Estudante {
 	@OneToOne(mappedBy = "estudante")
 	private Passaporte passaporte;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "estudantes")
 	private List<Curso> cursos;
 

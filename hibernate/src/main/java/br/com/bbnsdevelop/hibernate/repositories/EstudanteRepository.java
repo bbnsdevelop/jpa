@@ -7,8 +7,6 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.bbnsdevelop.hibernate.entities.Curso;
@@ -19,9 +17,6 @@ public class EstudanteRepository {
 
 	@Autowired
 	private CursoRepository cursoRepository;
-
-	@Autowired
-	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Autowired
 	private EntityManager entityManager;
@@ -57,25 +52,14 @@ public class EstudanteRepository {
 			throw new IllegalArgumentException("Estudante não encontrado");
 		}
 	}
-
+	
+	@Transactional
 	public void inserirEstudanteAoCurso(Long estudanteId, Long cursoId) {
 		Estudante estudante = this.findById(estudanteId);
 		Curso curso = cursoRepository.findById(cursoId);
-		if (curso != null && estudante != null) {
-			MapSqlParameterSource param = new MapSqlParameterSource();
-			param.addValue("cursoId", curso.getId());
-			param.addValue("estutandeId", estudante.getId());
-			namedParameterJdbcTemplate.update(insertEstutandeNoCurso(), param);
-		}
-	}
-
-	protected String insertEstutandeNoCurso() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("insert into ");
-		sb.append("TB_CURSO_ESTUDANTE(CURSO_ID, ESTUDANTE_ID) ");
-		sb.append("values (:cursoId, :estutandeId) ");
-
-		return sb.toString();
+		curso.addEstudante(estudante);
+		estudante.addCurso(curso);
+		entityManager.persist(curso);
 	}
 
 }
