@@ -1,7 +1,6 @@
 package br.com.bbnsdevelop.hibernate.entities.heranca;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +18,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "funcionarioType")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Funcionario {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
 	@Column(name ="nome", nullable = false, length = 70)
