@@ -32,6 +32,11 @@ public class CursoRepository {
 		return query.getResultList();
 	}
 	
+	public List<Curso> findCursosSemEstudante() {
+		TypedQuery<Curso> query = entityManager.createQuery("select c from Curso c where c.estudantes is empty", Curso.class);
+		return query.getResultList();
+	}
+	
 	
 	@Transactional
 	public Curso save(Curso curso) {

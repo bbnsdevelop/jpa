@@ -29,6 +29,11 @@ public class CursoController {
 		return repository.findAll();
 	}
 	
+	@GetMapping("/sem-estudantes")
+	public List<Curso> getCursosSemEstudante() {
+		return repository.findCursosSemEstudante();
+	}
+	
 	@GetMapping("/{id}")
 	public Curso getById(@PathVariable("id") Long id) {
 		return repository.findById(id);
