@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bbnsdevelop.hibernate.dto.CursoDto;
 import br.com.bbnsdevelop.hibernate.entities.Curso;
 import br.com.bbnsdevelop.hibernate.repositories.CursoRepository;
 
@@ -32,6 +33,10 @@ public class CursoController {
 	@GetMapping("/sem-estudantes")
 	public List<Curso> getCursosSemEstudante() {
 		return repository.findCursosSemEstudante();
+	}
+	@GetMapping("/com-mais-estudantes")
+	public List<CursoDto> getCursosComMaisEstudante() {
+		return repository.findCursosComMaisEstudantes();
 	}
 	
 	@GetMapping("/{id}")

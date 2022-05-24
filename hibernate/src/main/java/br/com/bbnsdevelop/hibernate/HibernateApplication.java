@@ -57,9 +57,16 @@ public class HibernateApplication implements CommandLineRunner {
 		
 		
 		Estudante s = new Estudante(null, "Willian", null, null);
+		Estudante s1 = new Estudante(null, "Jhon", null, null);
+		Estudante s2 = new Estudante(null, "Bob", null, null);
+		Estudante s3 = new Estudante(null, "Ana", null, null);
 		Passaporte p = new Passaporte(null, "ZR154877", s);
 
 		estudanteRepository.save(s);
+		estudanteRepository.save(s1);
+		estudanteRepository.save(s2);
+		estudanteRepository.save(s3);
+		
 		passaporteRepository.save(p);
 		Review r = new Review();
 		r.setAvaliacao(5);
@@ -76,6 +83,9 @@ public class HibernateApplication implements CommandLineRunner {
 		
 		estudanteRepository.inserirEstudanteAoCurso(s.getId(), cursos.get(0).getId());
 		estudanteRepository.inserirEstudanteAoCurso(s.getId(), cursos.get(1).getId());
+		estudanteRepository.inserirEstudanteAoCurso(s1.getId(), cursos.get(0).getId());
+		estudanteRepository.inserirEstudanteAoCurso(s2.getId(), cursos.get(0).getId());
+		estudanteRepository.inserirEstudanteAoCurso(s3.getId(), cursos.get(1).getId());
 		
 		funcionarioRepository.inserir(new FuncionarioPeriodoIntegral("Snow", new BigDecimal("4000")));
 		
