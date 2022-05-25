@@ -22,6 +22,9 @@ public class CursoRepository {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private CursoRepositoryCriteria cursoRepositoryCriteria;
 
 	public Curso findById(Long id) {
 		// return entityManager.find(Curso.class, id);
@@ -30,10 +33,15 @@ public class CursoRepository {
 		namedQuery.setParameter("id", id);
 		return namedQuery.getSingleResult();
 	}
-
+	
+	/*
 	public List<Curso> findAll() {
 		TypedQuery<Curso> query = entityManager.createNamedQuery("query_get_all_cursos", Curso.class);
 		return query.getResultList();
+	}*/
+	
+	public List<Curso> findAll() {		
+		return cursoRepositoryCriteria.findAllCursosCriteria();
 	}
 
 	public List<Curso> findCursosSemEstudante() {
