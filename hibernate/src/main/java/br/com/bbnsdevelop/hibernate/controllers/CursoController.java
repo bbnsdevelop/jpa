@@ -19,31 +19,35 @@ import br.com.bbnsdevelop.hibernate.repositories.CursoRepository;
 @RestController
 @RequestMapping("/api/cursos")
 public class CursoController {
-	
-	
+
 	@Autowired
 	private CursoRepository repository;
-	
-	
+
 	@GetMapping
 	public List<Curso> getAll() {
 		return repository.findAll();
 	}
-	
+
+	@GetMapping("/{nome}/nomes")
+	public List<Curso> getByNomes(@PathVariable("nome") String nome) {
+		return repository.findByNome(nome);
+	}
+
 	@GetMapping("/sem-estudantes")
 	public List<Curso> getCursosSemEstudante() {
 		return repository.findCursosSemEstudante();
 	}
+
 	@GetMapping("/com-mais-estudantes")
 	public List<CursoDto> getCursosComMaisEstudante() {
 		return repository.findCursosComMaisEstudantes();
 	}
-	
+
 	@GetMapping("/{id}")
 	public Curso getById(@PathVariable("id") Long id) {
 		return repository.findById(id);
 	}
-		
+
 	@PostMapping
 	public ResponseEntity<Curso> save(@RequestBody Curso curso) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(curso));

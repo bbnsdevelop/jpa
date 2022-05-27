@@ -43,6 +43,11 @@ public class CursoRepository {
 	public List<Curso> findAll() {		
 		return cursoRepositoryCriteria.findAllCursosCriteria();
 	}
+	
+	public List<Curso> findByNome(String nome) {		
+		return cursoRepositoryCriteria.findCursosLikeNameCriteria(nome);
+	}	
+	
 
 	public List<Curso> findCursosSemEstudante() {
 		TypedQuery<Curso> query = entityManager.createQuery("select c from Curso c where c.estudantes is empty",
