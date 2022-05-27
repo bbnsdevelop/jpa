@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -75,5 +77,44 @@ public class CursoRepositoryCriteria {
 		return query.getResultList();
 	}
 	
+	
+	public List<Curso> findTodosCursosJoinEstudantesCriteria() {
+		log.info("buscando cursos sem estudantes");
+		// 1 - Use criteria builder to create a Criteria Query returning the expected result object 
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Curso> createQuery = criteriaBuilder.createQuery(Curso.class);
+		
+		// 2 - Define roots for tables wich are involded in the query 
+		Root<Curso> cursoRoot = createQuery.from(Curso.class);
+		
+		// 3 - Defnie Predicates etc using Criteria builder 
+		Join<Object, Object> join = cursoRoot.join("estudantes");
+		
+		// 4 - Add Predicates etc to the Criteria query 
+		
+		// 5 - Build the typedQuery using the entity manager and criteria query 
+		TypedQuery<Curso> query = entityManager.createQuery(createQuery.select(cursoRoot));
+		return query.getResultList();
+	}
+	
+	
+	public List<Curso> findTodosCursosJoinLeftEstudantesCriteria() {
+		log.info("buscando cursos sem estudantes");
+		// 1 - Use criteria builder to create a Criteria Query returning the expected result object 
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Curso> createQuery = criteriaBuilder.createQuery(Curso.class);
+		
+		// 2 - Define roots for tables wich are involded in the query 
+		Root<Curso> cursoRoot = createQuery.from(Curso.class);
+		
+		// 3 - Defnie Predicates etc using Criteria builder 
+		Join<Object, Object> join = cursoRoot.join("estudantes", JoinType.LEFT);
+		
+		// 4 - Add Predicates etc to the Criteria query 
+		
+		// 5 - Build the typedQuery using the entity manager and criteria query 
+		TypedQuery<Curso> query = entityManager.createQuery(createQuery.select(cursoRoot));
+		return query.getResultList();
+	}
 	
 }
