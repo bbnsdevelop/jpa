@@ -19,10 +19,10 @@ public class CursoRepository {
 
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
 	private CursoRepositoryCriteria cursoRepositoryCriteria;
 
@@ -33,31 +33,33 @@ public class CursoRepository {
 		namedQuery.setParameter("id", id);
 		return namedQuery.getSingleResult();
 	}
-	
+
 	/*
+	 * public List<Curso> findAll() { TypedQuery<Curso> query =
+	 * entityManager.createNamedQuery("query_get_all_cursos", Curso.class); return
+	 * query.getResultList(); }
+	 */
+
 	public List<Curso> findAll() {
-		TypedQuery<Curso> query = entityManager.createNamedQuery("query_get_all_cursos", Curso.class);
-		return query.getResultList();
-	}*/
-	
-	public List<Curso> findAll() {		
 		return cursoRepositoryCriteria.findAllCursosCriteria();
 	}
-	
-	public List<Curso> findByNome(String nome) {		
-		return cursoRepositoryCriteria.findCursosLikeNameCriteria(nome);
-	}	
-	
 
+	public List<Curso> findByNome(String nome) {
+		return cursoRepositoryCriteria.findCursosLikeNameCriteria(nome);
+	}
+
+	/*
+	 * public List<Curso> findCursosSemEstudante() { TypedQuery<Curso> query =
+	 * entityManager.createQuery("select c from Curso c where c.estudantes is empty"
+	 * , Curso.class); return query.getResultList(); }
+	 */
 	public List<Curso> findCursosSemEstudante() {
-		TypedQuery<Curso> query = entityManager.createQuery("select c from Curso c where c.estudantes is empty",
-				Curso.class);
-		return query.getResultList();
+		return cursoRepositoryCriteria.findTodosCursosSemEstudantesCriteria();
 	}
 
 	public List<CursoDto> findCursosComMaisEstudantes() {
-		
-		return jdbcTemplate.query(queryCursosAlunos() , new BeanPropertyRowMapper<CursoDto>(CursoDto.class));
+
+		return jdbcTemplate.query(queryCursosAlunos(), new BeanPropertyRowMapper<CursoDto>(CursoDto.class));
 	}
 
 	@Transactional
@@ -83,9 +85,9 @@ public class CursoRepository {
 	private String queryCursosAlunos() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("SELECT c.id, ");  
+		sb.append("SELECT c.id id, ");
 		sb.append("c.dh_criacao dataCriacao, c.nome nome, c.dh_atualizacao dataAtualizacao, ");
-		sb.append("(select count(*) from TB_CURSO_ESTUDANTE ce where ce.curso_id = c.id ) qtdAlunos "); 
+		sb.append("(select count(*) from TB_CURSO_ESTUDANTE ce where ce.curso_id = c.id ) qtdAlunos ");
 		sb.append("FROM TB_CURSO c ORDER BY qtdAlunos DESC");
 
 		return sb.toString();

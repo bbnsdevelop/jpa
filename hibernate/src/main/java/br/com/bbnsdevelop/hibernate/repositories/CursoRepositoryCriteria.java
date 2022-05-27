@@ -22,7 +22,26 @@ public class CursoRepositoryCriteria {
 	private EntityManager entityManager;
 	
 	
+	public List<Curso> findCursosLikeNameCriteria(String nomeCurso) {
+		// 1 - Use criteria builder to create a Criteria Query returning the expected result object 
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Curso> createQuery = criteriaBuilder.createQuery(Curso.class);
+		
+		// 2 - Define roots for tables wich are involded in the query 
+		Root<Curso> cursoRoot = createQuery.from(Curso.class);
+		
+		// 3 - Defnie Predicates etc using Criteria builder 
+		Predicate like = criteriaBuilder.like(cursoRoot.get("nome"), "%".concat(nomeCurso).concat("%"));
+		
+		// 4 - Add Predicates etc to the Criteria query 
+		createQuery.where(like);
+		
+		// 5 - Build the typedQuery using the entity manager and criteria query 
+		TypedQuery<Curso> query = entityManager.createQuery(createQuery.select(cursoRoot));
+		return query.getResultList();
+	}
 	
+
 	public List<Curso> findAllCursosCriteria() {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		
@@ -34,7 +53,7 @@ public class CursoRepositoryCriteria {
 	}
 	
 	
-	public List<Curso> findCursosLikeNameCriteria(String nomeCurso) {
+	public List<Curso> findTodosCursosSemEstudantesCriteria() {
 		// 1 - Use criteria builder to create a Criteria Query returning the expected result object 
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Curso> createQuery = criteriaBuilder.createQuery(Curso.class);
@@ -43,8 +62,8 @@ public class CursoRepositoryCriteria {
 		Root<Curso> cursoRoot = createQuery.from(Curso.class);
 		
 		// 3 - Defnie Predicates etc using Criteria builder 
-		Predicate like = criteriaBuilder.like(cursoRoot.get("nome"), "%".concat(nomeCurso).concat("%"));
-
+		Predicate like = criteriaBuilder.isEmpty(cursoRoot.get("estudantes"));
+		
 		// 4 - Add Predicates etc to the Criteria query 
 		createQuery.where(like);
 		
@@ -52,5 +71,6 @@ public class CursoRepositoryCriteria {
 		TypedQuery<Curso> query = entityManager.createQuery(createQuery.select(cursoRoot));
 		return query.getResultList();
 	}
+	
 	
 }
