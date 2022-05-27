@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.bbnsdevelop.hibernate.entities.Curso;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class CursoRepositoryCriteria {
 
 	
@@ -54,6 +56,7 @@ public class CursoRepositoryCriteria {
 	
 	
 	public List<Curso> findTodosCursosSemEstudantesCriteria() {
+		log.info("buscando cursos sem estudantes");
 		// 1 - Use criteria builder to create a Criteria Query returning the expected result object 
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Curso> createQuery = criteriaBuilder.createQuery(Curso.class);
