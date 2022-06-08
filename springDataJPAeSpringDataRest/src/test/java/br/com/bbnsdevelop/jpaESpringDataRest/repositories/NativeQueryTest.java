@@ -1,0 +1,44 @@
+package br.com.bbnsdevelop.jpaESpringDataRest.repositories;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import br.com.bbnsdevelop.jpaESpringDataRest.JPADataRestApplication;
+import br.com.bbnsdevelop.jpaESpringDataRest.entities.Curso;
+
+@SpringBootTest(classes = JPADataRestApplication.class)
+@TestMethodOrder(OrderAnnotation.class)
+public class NativeQueryTest {
+	
+	@Autowired
+	private EntityManager entityManager;
+	
+	
+	@Test	
+	public void findAllNativeQuery() {
+		Query query = entityManager.createNativeQuery("Select * FROM TB_CURSO", Curso.class);
+		List<Curso> resultList = query.getResultList();
+		assertNotNull(resultList);
+		
+	}
+	
+	
+	@Test	
+	public void findByIdNativeQuery() {
+		Query query = entityManager.createNativeQuery("Select * FROM TB_CURSO where id = ?", Curso.class);
+		query.setParameter(1, 1);
+		Curso result = (Curso) query.getSingleResult();
+		assertNotNull(result);
+		
+	}
+}

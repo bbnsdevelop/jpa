@@ -1,0 +1,26 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /jpa-data-rest
+
+spring:
+  h2:
+    console.enabled: true
+    console:
+      path: /h2
+  
+  datasource:
+    url: jdbc:h2:mem:testdb
+    
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:  
+        format_sql: false
