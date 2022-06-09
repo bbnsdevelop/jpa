@@ -3,6 +3,7 @@ package br.com.bbnsdevelop.jpaESpringDataRest.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,9 @@ public class CursoController {
 	private CursoRepository repository;
 
 	@GetMapping
-	public List<Curso> getAll() {
-		return repository.findAll();
+	public List<Curso> getAll() {	
+		Sort sort = Sort.by(Sort.Direction.ASC, "nome");		
+		return repository.findAll(sort);
 	}
 
 	@GetMapping("/{nome}/nomes")
