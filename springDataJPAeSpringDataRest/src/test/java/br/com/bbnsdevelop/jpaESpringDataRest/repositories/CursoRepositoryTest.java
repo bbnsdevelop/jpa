@@ -1,12 +1,14 @@
 package br.com.bbnsdevelop.jpaESpringDataRest.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -14,7 +16,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +28,7 @@ import br.com.bbnsdevelop.jpaESpringDataRest.entities.Curso;
 @TestMethodOrder(OrderAnnotation.class)
 public class CursoRepositoryTest {
 	
-	@InjectMocks
+	@Mock
 	private CursoRepository repository;
 	
 	@Spy
@@ -42,8 +43,10 @@ public class CursoRepositoryTest {
 	@Order(2)
 	public void findById() {
 		Curso curso = mockCurso();
-		when(repository.findById(1L).get()).thenReturn(curso);
+		Optional<Curso> cursoOpt = Optional.of(curso);
+		when(repository.findById(1L)).thenReturn(cursoOpt);
 		assertEquals("JPA", curso.getNome());
+		assertTrue(cursoOpt.isPresent());
 	}
 	
 	

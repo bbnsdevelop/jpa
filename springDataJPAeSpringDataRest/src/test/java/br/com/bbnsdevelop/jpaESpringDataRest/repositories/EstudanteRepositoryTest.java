@@ -1,10 +1,13 @@
 package br.com.bbnsdevelop.jpaESpringDataRest.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -12,7 +15,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +27,7 @@ import br.com.bbnsdevelop.jpaESpringDataRest.entities.Estudante;
 @TestMethodOrder(OrderAnnotation.class)
 public class EstudanteRepositoryTest {
 	
-	@InjectMocks
+	@Mock
 	private EstudanteRepository repository;
 	
 	@Spy
@@ -40,8 +42,10 @@ public class EstudanteRepositoryTest {
 	@Order(2)
 	public void findById() {
 		Estudante estudante = mockC();
-		when(repository.findById(1L).get()).thenReturn(estudante);
+		Optional<Estudante> estudanteOpt = Optional.of(estudante);
+		when(repository.findById(1L)).thenReturn(estudanteOpt);
 		assertEquals("Willian", estudante.getNome());
+		assertTrue(estudanteOpt.isPresent());
 	}
 	
 	
