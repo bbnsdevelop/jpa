@@ -51,14 +51,15 @@ public class JPADataRestApplication implements CommandLineRunner {
 				new Curso(null, "Spring boot", LocalDateTime.now(), null, null, null),
 				new Curso(null, "Python", LocalDateTime.now(), null, null, null),
 				new Curso(null, "Java EE", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Angular", LocalDateTime.now(), null, null, null));
+				new Curso(null, "Angular", LocalDateTime.now(), null, null, null),
+				new Curso(null, "TypeScript", LocalDateTime.now(), null, null, null),
+				new Curso(null, "Nodejs", LocalDateTime.now(), null, null, null),
+				new Curso(null, "JavaScript", LocalDateTime.now(), null, null, null),
+				new Curso(null, "Jquery", LocalDateTime.now(), null, null, null),
+				new Curso(null, "EJB", LocalDateTime.now(), null, null, null));
 
-		repository.save(cursos.get(0));
-		repository.save(cursos.get(1));
-		repository.save(cursos.get(2));
-		repository.save(cursos.get(3));
-		repository.save(cursos.get(4));
-
+		repository.saveAll(cursos);
+		
 		Estudante s = new Estudante(null, "Willian", null, null);
 		Estudante s1 = new Estudante(null, "Jhon", null, null);
 		Estudante s2 = new Estudante(null, "Bob", null, null);
