@@ -38,7 +38,7 @@ public class CursoControllerTest {
 	@Test
 	void criarCursoTest() throws Exception {
 
-		Curso curso = new Curso(null, "JavaScript", LocalDateTime.now(), null, null, null);
+		Curso curso = new Curso(null, "JavaScript", LocalDateTime.now(), null, null, null, false);
 		mockMvc.perform(
 				post("/api/cursos").contentType("application/json").content(objectMapper.writeValueAsString(curso)))
 				.andExpect(status().isCreated());

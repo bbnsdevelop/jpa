@@ -47,16 +47,16 @@ public class JPADataRestApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Curso> cursos = List.of(new Curso(null, "Java", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Spring boot", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Python", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Java EE", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Angular", LocalDateTime.now(), null, null, null),
-				new Curso(null, "TypeScript", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Nodejs", LocalDateTime.now(), null, null, null),
-				new Curso(null, "JavaScript", LocalDateTime.now(), null, null, null),
-				new Curso(null, "Jquery", LocalDateTime.now(), null, null, null),
-				new Curso(null, "EJB", LocalDateTime.now(), null, null, null));
+		List<Curso> cursos = List.of(new Curso(null, "Java", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "Spring boot", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "Python", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "Java EE", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "Angular", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "TypeScript", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "Nodejs", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "JavaScript", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "Jquery", LocalDateTime.now(), null, null, null, false),
+				new Curso(null, "EJB", LocalDateTime.now(), null, null, null, false));
 
 		repository.saveAll(cursos);
 		

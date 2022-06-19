@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +36,7 @@ import lombok.NoArgsConstructor;
 		@NamedQuery(name = "query_get_curso_by_id", query = "select c from Curso c where c.id = :id") 
 		})
 @Cacheable
+@SQLDelete(sql = "update TB_CURSO set is_deleted=true where id =?")
 public class Curso {
 
 	@Id
@@ -61,6 +63,9 @@ public class Curso {
 				inverseJoinColumns = @JoinColumn(name="ESTUDANTE_ID")
 			)
 	private List<Estudante> estudantes  = new ArrayList<>();
+	
+	
+	private Boolean isDeleted;
 	
 	public void addEstudante(Estudante estudante) {
 		if(estudantes == null) {
