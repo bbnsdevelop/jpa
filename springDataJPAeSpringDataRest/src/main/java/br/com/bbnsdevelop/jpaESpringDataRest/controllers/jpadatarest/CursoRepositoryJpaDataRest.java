@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import br.com.bbnsdevelop.jpaESpringDataRest.entities.Curso;
 
-@RepositoryRestResource(path = "/cursos")
+@RepositoryRestResource(path = "cursos")
 public interface CursoRepositoryJpaDataRest extends JpaRepository<Curso, Long> {
 
 	public List<Curso> findByNome(String nome);

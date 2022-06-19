@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ import lombok.NoArgsConstructor;
 		@NamedQuery(name = "query_get_all_cursos", query = "select c from Curso c"),
 		@NamedQuery(name = "query_get_curso_by_id", query = "select c from Curso c where c.id = :id") 
 		})
+@Cacheable
 public class Curso {
 
 	@Id
