@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,7 @@ import lombok.NoArgsConstructor;
 		})
 @Cacheable
 @SQLDelete(sql = "update TB_CURSO set is_deleted=true where id =?")
+@Where(clause = "is_deleted=false")
 public class Curso {
 
 	@Id
